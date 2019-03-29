@@ -1,188 +1,176 @@
-import React from 'react';
+import React from "react";
 import {
   Image,
   Platform,
   ScrollView,
   StyleSheet,
-  Text,
   TouchableOpacity,
-  View,
-} from 'react-native';
-import { WebBrowser } from 'expo';
+  View
+} from "react-native";
+import { WebBrowser } from "expo";
 
-import { MonoText } from '../components/StyledText';
+import { MonoText } from "../components/StyledText";
+import { Button, Left, Text, Right, Badge, Icon, Body } from "native-base";
 
 export default class HomeScreen extends React.Component {
   static navigationOptions = {
-    header: null,
+    title: "My Classrooms"
   };
 
   render() {
     return (
       <View style={styles.container}>
-        <ScrollView style={styles.container} contentContainerStyle={styles.contentContainer}>
-          <View style={styles.welcomeContainer}>
-            <Image
-              source={
-                __DEV__
-                  ? require('../assets/images/robot-dev.png')
-                  : require('../assets/images/robot-prod.png')
-              }
-              style={styles.welcomeImage}
-            />
-          </View>
+        <ScrollView
+          style={styles.container}
+          contentContainerStyle={styles.contentContainer}
+        >
+          <Button bordered style={styles.myClassroomContainer}>
+            <Left style={{ left: 10 }}>
+              <Text style={{ color: "#00bcd4" }}>Classroom Subject </Text>
 
-          <View style={styles.getStartedContainer}>
-            {this._maybeRenderDevelopmentModeWarning()}
+              <Icon
+                name="calendar"
+                type="AntDesign"
+                style={{
+                  fontSize: 18,
+                  left: 10,
+                  top: 5,
+                  color: "#C1C1C1"
+                }}
+              >
+                <Text note> 2019 {"    "}</Text>
+                <Icon
+                  name="graduation-cap"
+                  type="Entypo"
+                  style={{
+                    fontSize: 20,
+                    left: 10,
+                    top: 5,
+                    color: "#E1E1E1"
+                  }}
+                >
+                  <Text note> 12</Text>
+                </Icon>
+              </Icon>
+            </Left>
 
-            <Text style={styles.getStartedText}>Get started by opening</Text>
-
-            <View style={[styles.codeHighlightContainer, styles.homeScreenFilename]}>
-              <MonoText style={styles.codeHighlightText}>screens/HomeScreen.js</MonoText>
+            <View style={{ right: 10 }}>
+              <Badge style={{ backgroundColor: "#00bcd4" }}>
+                <Text>2</Text>
+              </Badge>
             </View>
-
-            <Text style={styles.getStartedText}>
-              Change this text and your app will automatically reload.
-            </Text>
-          </View>
-
-          <View style={styles.helpContainer}>
-            <TouchableOpacity onPress={this._handleHelpPress} style={styles.helpLink}>
-              <Text style={styles.helpLinkText}>Help, it didn’t automatically reload!</Text>
-            </TouchableOpacity>
-          </View>
+          </Button>
         </ScrollView>
 
-        <View style={styles.tabBarInfoContainer}>
-          <Text style={styles.tabBarInfoText}>This is a tab bar. You can edit it in:</Text>
-
-          <View style={[styles.codeHighlightContainer, styles.navigationFilename]}>
-            <MonoText style={styles.codeHighlightText}>navigation/MainTabNavigator.js</MonoText>
-          </View>
-        </View>
+        <Button style={styles.createClassroomContainer}>
+          <Text style={styles.createClassroomText}>New Classroom</Text>
+        </Button>
       </View>
     );
   }
-
-  _maybeRenderDevelopmentModeWarning() {
-    if (__DEV__) {
-      const learnMoreButton = (
-        <Text onPress={this._handleLearnMorePress} style={styles.helpLinkText}>
-          Learn more
-        </Text>
-      );
-
-      return (
-        <Text style={styles.developmentModeText}>
-          Development mode is enabled, your app will be slower but you can use useful development
-          tools. {learnMoreButton}
-        </Text>
-      );
-    } else {
-      return (
-        <Text style={styles.developmentModeText}>
-          You are not in development mode, your app will run at full speed.
-        </Text>
-      );
-    }
-  }
-
-  _handleLearnMorePress = () => {
-    WebBrowser.openBrowserAsync('https://docs.expo.io/versions/latest/guides/development-mode');
-  };
-
-  _handleHelpPress = () => {
-    WebBrowser.openBrowserAsync(
-      'https://docs.expo.io/versions/latest/guides/up-and-running.html#can-t-see-your-changes'
-    );
-  };
 }
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#fff',
+    backgroundColor: "#FBFBFB"
   },
   developmentModeText: {
     marginBottom: 20,
-    color: 'rgba(0,0,0,0.4)',
+    color: "rgba(0,0,0,0.4)",
     fontSize: 14,
     lineHeight: 19,
-    textAlign: 'center',
+    textAlign: "center"
   },
   contentContainer: {
-    paddingTop: 30,
+    paddingTop: 30
   },
   welcomeContainer: {
-    alignItems: 'center',
+    alignItems: "center",
     marginTop: 10,
-    marginBottom: 20,
+    marginBottom: 20
   },
   welcomeImage: {
     width: 100,
     height: 80,
-    resizeMode: 'contain',
+    resizeMode: "contain",
     marginTop: 3,
-    marginLeft: -10,
+    marginLeft: -10
   },
   getStartedContainer: {
-    alignItems: 'center',
-    marginHorizontal: 50,
+    alignItems: "center",
+    marginHorizontal: 50
   },
   homeScreenFilename: {
-    marginVertical: 7,
+    marginVertical: 7
   },
-  codeHighlightText: {
-    color: 'rgba(96,100,109, 0.8)',
+  createClassroomText: {
+    color: "#FFF",
+    fontSize: 20,
+    paddingLeft: "30%",
+    alignSelf: "center",
+    textAlign: "center",
+    justifyContent: "center",
+    alignItems: "center"
   },
   codeHighlightContainer: {
-    backgroundColor: 'rgba(0,0,0,0.05)',
+    backgroundColor: "rgba(0,0,0,0.05)",
     borderRadius: 3,
-    paddingHorizontal: 4,
+    paddingHorizontal: 4
   },
   getStartedText: {
     fontSize: 17,
-    color: 'rgba(96,100,109, 1)',
+    color: "rgba(96,100,109, 1)",
     lineHeight: 24,
-    textAlign: 'center',
+    textAlign: "center"
   },
-  tabBarInfoContainer: {
-    position: 'absolute',
-    bottom: 0,
-    left: 0,
-    right: 0,
-    ...Platform.select({
-      ios: {
-        shadowColor: 'black',
-        shadowOffset: { height: -3 },
-        shadowOpacity: 0.1,
-        shadowRadius: 3,
-      },
-      android: {
-        elevation: 20,
-      },
-    }),
-    alignItems: 'center',
-    backgroundColor: '#fbfbfb',
-    paddingVertical: 20,
+  myClassroomContainer: {
+    position: "absolute",
+    top: 15,
+    left: 15,
+    right: 15,
+    height: 70,
+    shadowColor: "black",
+    shadowOffset: { height: -1 },
+    shadowOpacity: 0.05,
+    borderRadius: 8,
+    borderColor: "#F9F9F9",
+    shadowRadius: 3,
+    alignItems: "center",
+    backgroundColor: "#FFF"
+  },
+  createClassroomContainer: {
+    position: "absolute",
+    bottom: 15,
+    left: 15,
+    right: 15,
+    height: 50,
+    shadowColor: "black",
+    shadowOffset: { height: -3 },
+    shadowOpacity: 0.1,
+    shadowRadius: 3,
+    borderRadius: 18,
+    alignItems: "center",
+    backgroundColor: "#00bcd4"
   },
   tabBarInfoText: {
     fontSize: 17,
-    color: 'rgba(96,100,109, 1)',
-    textAlign: 'center',
+    color: "#FFF",
+    textAlign: "center",
+    padding: 10
   },
   navigationFilename: {
-    marginTop: 5,
+    marginTop: 5
   },
   helpContainer: {
     marginTop: 15,
-    alignItems: 'center',
+    alignItems: "center"
   },
   helpLink: {
-    paddingVertical: 15,
+    paddingVertical: 15
   },
   helpLinkText: {
     fontSize: 14,
-    color: '#2e78b7',
-  },
+    color: "#2e78b7"
+  }
 });
