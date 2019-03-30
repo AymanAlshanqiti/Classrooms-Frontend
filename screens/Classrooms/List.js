@@ -3,7 +3,7 @@ import { ScrollView, StyleSheet, View } from "react-native";
 
 import Classrooms from "../../components/Classrooms/List";
 import { Button, Left, Text, Right, Badge, Icon, Body } from "native-base";
-import ClassroomItem from "../../components/Classrooms";
+import ClassroomItem from "../../components/Classrooms/Rows";
 
 export default class ClassroomsList extends React.Component {
   static navigationOptions = {
@@ -12,7 +12,13 @@ export default class ClassroomsList extends React.Component {
 
   render() {
     const classrooms = Classrooms.map(classroom => {
-      return <ClassroomItem classroom={classroom} key={classroom.id} />;
+      return (
+        <ClassroomItem
+          classroom={classroom}
+          key={classroom.id}
+          color="#F12580"
+        />
+      );
     });
     return (
       <View style={styles.container}>

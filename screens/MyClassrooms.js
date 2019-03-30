@@ -10,7 +10,7 @@ import {
 
 import { Button, Left, Text, Right, Badge, Icon, Body } from "native-base";
 import MyClassrooms from "../components/Classrooms/List";
-import ClassroomItem from "../components/MyClassrooms";
+import ClassroomItem from "../components/Classrooms/Rows";
 
 export default class HomeScreen extends React.Component {
   static navigationOptions = {
@@ -19,7 +19,13 @@ export default class HomeScreen extends React.Component {
 
   render() {
     const myClassrooms = MyClassrooms.map(myClassroom => {
-      return <ClassroomItem classroom={myClassroom} key={myClassroom.id} />;
+      return (
+        <ClassroomItem
+          classroom={myClassroom}
+          key={myClassroom.id}
+          color="#00bcd4"
+        />
+      );
     });
     return (
       <View style={styles.container}>

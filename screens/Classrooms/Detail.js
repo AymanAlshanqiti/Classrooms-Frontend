@@ -3,7 +3,7 @@ import { ScrollView, StyleSheet, View } from "react-native";
 
 import Classrooms from "../../components/Classrooms/List";
 import { Left, Text, Right, Badge, Icon, Body, Row } from "native-base";
-import ClassroomItem from "../../components/Classrooms";
+import ClassroomItem from "../../components/Classrooms/Rows";
 
 export default class ClassroomDetail extends React.Component {
   static navigationOptions = {

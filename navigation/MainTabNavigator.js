@@ -6,12 +6,12 @@ import {
 } from "react-navigation";
 
 import TabBarIcon from "../components/TabBarIcon";
-import HomeScreen from "../screens/MyClassrooms";
-import ClassroomsList from "../screens/Classrooms/Detail";
-import SettingsScreen from "../screens/Profile";
+import MyClasses from "../screens/MyClassrooms";
+import ClassroomsList from "../screens/Classrooms/List";
+import Profile from "../screens/Profile";
 
 const HomeStack = createStackNavigator({
-  Home: HomeScreen
+  MyClasses: MyClasses
 });
 
 HomeStack.navigationOptions = {
@@ -29,7 +29,7 @@ HomeStack.navigationOptions = {
 };
 
 const LinksStack = createStackNavigator({
-  Links: ClassroomsList
+  Classrooms: ClassroomsList
 });
 
 LinksStack.navigationOptions = {
@@ -43,7 +43,7 @@ LinksStack.navigationOptions = {
 };
 
 const SettingsStack = createStackNavigator({
-  Settings: SettingsScreen
+  Profile: Profile
 });
 
 SettingsStack.navigationOptions = {

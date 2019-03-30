@@ -1,14 +1,19 @@
 import React, { Component } from "react";
 import { StyleSheet, View } from "react-native";
 import { Button, Left, Text, Badge, Icon } from "native-base";
+import { withNavigation } from "react-navigation";
 
-class ClassroomItem extends Component {
+class ClassroomRow extends Component {
   render() {
     const classroom = this.props.classroom;
     return (
-      <Button bordered style={styles.ClassroomsContainer}>
+      <Button
+        bordered
+        style={styles.ClassroomsContainer}
+        onPress={() => this.props.navigation.navigate("Detail")}
+      >
         <Left style={{ left: 10 }}>
-          <Text style={{ color: "#F12580" }}>{classroom.subject} </Text>
+          <Text style={{ color: this.props.color }}>{classroom.subject} </Text>
 
           <Icon
             name="calendar"
@@ -40,7 +45,7 @@ class ClassroomItem extends Component {
         </Left>
 
         <View style={{ right: 10 }}>
-          <Badge style={{ backgroundColor: "#F12580" }}>
+          <Badge style={{ backgroundColor: this.props.color }}>
             <Text>2</Text>
           </Badge>
         </View>
@@ -48,8 +53,6 @@ class ClassroomItem extends Component {
     );
   }
 }
-
-export default ClassroomItem;
 
 const styles = StyleSheet.create({
   ClassroomsContainer: {
@@ -69,3 +72,4 @@ const styles = StyleSheet.create({
     backgroundColor: "#FFF"
   }
 });
+export default withNavigation(ClassroomRow);
