@@ -1,5 +1,5 @@
 import React from "react";
-import { Platform } from "react-native";
+import { Icon } from "native-base";
 import {
   createStackNavigator,
   createBottomTabNavigator
@@ -8,36 +8,37 @@ import {
 import TabBarIcon from "../components/TabBarIcon";
 import MyClasses from "../screens/MyClassrooms";
 import ClassroomsList from "../screens/Classrooms/List";
+import ClassroomDetail from "../screens/Classrooms/Detail";
 import Profile from "../screens/Profile";
 
 const HomeStack = createStackNavigator({
-  MyClasses: MyClasses
+  MyClasses: MyClasses,
+  Detail: ClassroomDetail
 });
 
 HomeStack.navigationOptions = {
   tabBarLabel: "My Classes",
-  tabBarIcon: ({ focused }) => (
-    <TabBarIcon
-      focused={focused}
-      name={
-        Platform.OS === "ios"
-          ? `ios-information-circle${focused ? "" : "-outline"}`
-          : "md-information-circle"
-      }
+  tabBarIcon: (
+    <Icon
+      name="mortar-board"
+      type="FontAwesome"
+      style={{ fontSize: 25, color: "#F12580" }}
     />
   )
 };
 
 const LinksStack = createStackNavigator({
-  Classrooms: ClassroomsList
+  Classrooms: ClassroomsList,
+  Detail: ClassroomDetail
 });
 
 LinksStack.navigationOptions = {
   tabBarLabel: "Classrooms",
   tabBarIcon: ({ focused }) => (
-    <TabBarIcon
-      focused={focused}
-      name={Platform.OS === "ios" ? "ios-link" : "md-link"}
+    <Icon
+      name="mortar-board"
+      type="FontAwesome"
+      style={{ fontSize: 25, color: "#CCC" }}
     />
   )
 };
@@ -49,9 +50,10 @@ const SettingsStack = createStackNavigator({
 SettingsStack.navigationOptions = {
   tabBarLabel: "Profile",
   tabBarIcon: ({ focused }) => (
-    <TabBarIcon
-      focused={focused}
-      name={Platform.OS === "ios" ? "ios-options" : "md-options"}
+    <Icon
+      name="mortar-board"
+      type="FontAwesome"
+      style={{ fontSize: 25, color: "#CCC" }}
     />
   )
 };

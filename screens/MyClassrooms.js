@@ -1,24 +1,26 @@
-import React from "react";
-import {
-  Image,
-  Platform,
-  ScrollView,
-  StyleSheet,
-  TouchableOpacity,
-  View
-} from "react-native";
+import React, { Component } from "react";
+import { ScrollView, StyleSheet, View } from "react-native";
 
-import { Button, Left, Text, Right, Badge, Icon, Body } from "native-base";
-import MyClassrooms from "../components/Classrooms/List";
+import { Button, Text } from "native-base";
+
+// Components
 import ClassroomItem from "../components/Classrooms/Rows";
 
-export default class HomeScreen extends React.Component {
+// Actions && Connections with Redux
+import { connect } from "react-redux";
+import * as actionCreators from "../store/actions/classroomsActions";
+
+class HomeScreen extends Component {
   static navigationOptions = {
     title: "My Classrooms"
   };
 
+  async componentDidMount() {
+    await this.props.fetchClassrooms();
+  }
+
   render() {
-    const myClassrooms = MyClassrooms.map(myClassroom => {
+    const myClassrooms = this.props.classrooms.map(myClassroom => {
       return (
         <ClassroomItem
           classroom={myClassroom}
@@ -27,6 +29,7 @@ export default class HomeScreen extends React.Component {
         />
       );
     });
+
     return (
       <View style={styles.container}>
         <ScrollView
@@ -78,3 +81,16 @@ const styles = StyleSheet.create({
     backgroundColor: "#00bcd4"
   }
 });
+
+const mapStateToProps = state => ({
+  classrooms: state.classroomsReducer.classrooms
+});
+
+const mapDispatchToProps = dispatch => ({
+  fetchClassrooms: () => dispatch(actionCreators.getClassrooms())
+});
+
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(HomeScreen);

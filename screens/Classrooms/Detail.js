@@ -1,128 +1,166 @@
 import React, { Component } from "react";
 import { ScrollView, StyleSheet, View } from "react-native";
+import {
+  Left,
+  Text,
+  Right,
+  Badge,
+  Icon,
+  Body,
+  Row,
+  Spinner
+} from "native-base";
 
+// Components
 import Classrooms from "../../components/Classrooms/List";
-import { Left, Text, Right, Badge, Icon, Body, Row } from "native-base";
-import ClassroomItem from "../../components/Classrooms/Rows";
 
-export default class ClassroomDetail extends React.Component {
+// Actions && Connections with Redux
+import { connect } from "react-redux";
+import * as actionCreators from "../../store/actions/classroomsActions";
+
+class ClassroomDetail extends Component {
   static navigationOptions = {
     title: "Classroom Detail"
   };
 
+  state = {
+    loading: true
+  };
+
+  classroomId = this.props.navigation.getParam("classroomId");
+  async componentDidMount() {
+    await this.props.getClassroomObj(this.classroomId);
+  }
+
   render() {
-    return (
-      <View style={styles.container}>
-        <View
-          style={styles.container}
-          contentContainerStyle={styles.contentContainer}
-        >
-          <View bordered style={styles.ClassroomsContainer}>
-            <Text style={{ color: "#F12580", top: 20, fontSize: 20 }}>
-              {Classrooms[1].subject}{" "}
-            </Text>
-            <Row style={{ position: "absolute", top: 45 }}>
-              <Body>
-                <Icon
-                  name="calendar"
-                  type="AntDesign"
-                  style={{
-                    fontSize: 18,
-                    top: 15,
-                    color: "#C1C1C1"
-                  }}
-                >
-                  <Text note>
-                    {" "}
-                    {Classrooms[1].year} {"    "}
-                  </Text>
-                  <Icon
-                    name="graduation-cap"
-                    type="Entypo"
-                    style={{
-                      fontSize: 20,
-                      top: 15,
-                      color: "#E1E1E1"
-                    }}
-                  >
-                    <Text note> {Classrooms[1].grade}</Text>
-                  </Icon>
-                </Icon>
-              </Body>
-            </Row>
-
-            <Row style={{ position: "absolute", top: 75 }}>
-              <Body>
-                <Icon
-                  name="person"
-                  type="Octicons"
-                  style={{
-                    fontSize: 18,
-                    top: 15,
-                    color: "#C1C1C1"
-                  }}
-                >
-                  <Text note> Teatcher: </Text>
-
-                  <Text note> {Classrooms[1].subject}</Text>
-                </Icon>
-              </Body>
-            </Row>
-
-            <Row style={{ position: "absolute", top: 125 }}>
-              <Body>
-                <Text note> Class's Students </Text>
-                <Icon
-                  name="ios-arrow-down"
-                  type="Ionicons"
-                  style={{
-                    fontSize: 18,
-                    top: 10,
-                    color: "#C1C1C1"
-                  }}
-                />
-              </Body>
-            </Row>
-          </View>
-
-          <ScrollView
+    const classroomObj = this.props.classroomObj;
+    console.log("TCL: ClassroomDetail -> render -> classroomObj", classroomObj);
+    if (!classroomObj) {
+      return (
+        <View>
+          <Spinner />
+        </View>
+      );
+    } else {
+      return (
+        <View style={styles.container}>
+          <View
             style={styles.container}
             contentContainerStyle={styles.contentContainer}
           >
-            <View bordered style={styles.ClassroomsContainer}>
-              <Left style={{ left: 10 }}>
-                <Text style={{ color: "#F12580" }}>dffddf </Text>
-
-                <Icon
-                  name="calendar"
-                  type="AntDesign"
-                  style={{
-                    fontSize: 18,
-                    left: 10,
-                    top: 5,
-                    color: "#C1C1C1"
-                  }}
-                >
-                  <Text note> ddd {"    "}</Text>
+            <View bordered style={styles.ClassroomContainer}>
+              <Text style={{ color: "#F12580", top: 20, fontSize: 20 }}>
+                {classroomObj.subject}{" "}
+              </Text>
+              <Row style={{ position: "absolute", top: 45 }}>
+                <Body>
                   <Icon
-                    name="graduation-cap"
-                    type="Entypo"
+                    name="calendar"
+                    type="AntDesign"
                     style={{
-                      fontSize: 20,
-                      left: 10,
-                      top: 5,
-                      color: "#E1E1E1"
+                      fontSize: 18,
+                      top: 15,
+                      color: "#C1C1C1"
                     }}
                   >
-                    <Text note> dadd</Text>
+                    <Text note style={{ color: "#F12580" }}>
+                      {" "}
+                      {classroomObj.year} {"    "}
+                    </Text>
+                    <Icon
+                      name="graduation-cap"
+                      type="Entypo"
+                      style={{
+                        fontSize: 20,
+                        top: 15,
+                        color: "#E1E1E1"
+                      }}
+                    >
+                      <Text note style={{ color: "#F12580" }}>
+                        {" "}
+                        {classroomObj.grade}
+                      </Text>
+                    </Icon>
                   </Icon>
-                </Icon>
-              </Left>
+                </Body>
+              </Row>
+
+              <Row style={{ position: "absolute", top: 75 }}>
+                <Body>
+                  <Icon
+                    name="person"
+                    type="Octicons"
+                    style={{
+                      fontSize: 18,
+                      top: 15,
+                      color: "#C1C1C1"
+                    }}
+                  >
+                    <Text note> Teacher: </Text>
+
+                    <Text note style={{ color: "#F12580" }}>
+                      {" "}
+                      {classroomObj.teacher.username}
+                    </Text>
+                  </Icon>
+                </Body>
+              </Row>
+
+              <Row style={{ position: "absolute", top: 125 }}>
+                <Body>
+                  <Text note> Class's Students </Text>
+                  <Icon
+                    name="ios-arrow-down"
+                    type="Ionicons"
+                    style={{
+                      fontSize: 18,
+                      top: 10,
+                      color: "#C1C1C1"
+                    }}
+                  />
+                </Body>
+              </Row>
             </View>
-          </ScrollView>
+
+            <ScrollView
+              style={styles.container}
+              contentContainerStyle={styles.contentContainer}
+            >
+              <View bordered style={styles.StudentContainer}>
+                <Left style={{ left: 10, top: 15 }}>
+                  <Text style={{ color: "#F12580" }}>dffddf </Text>
+
+                  <Icon
+                    name="calendar"
+                    type="AntDesign"
+                    style={{
+                      fontSize: 18,
+                      left: 10,
+                      top: 5,
+                      color: "#C1C1C1"
+                    }}
+                  >
+                    <Text note> ddd {"    "}</Text>
+                    <Icon
+                      name="graduation-cap"
+                      type="Entypo"
+                      style={{
+                        fontSize: 20,
+                        left: 10,
+                        top: 5,
+                        color: "#E1E1E1"
+                      }}
+                    >
+                      <Text note> dadd</Text>
+                    </Icon>
+                  </Icon>
+                </Left>
+              </View>
+            </ScrollView>
+          </View>
         </View>
-      </View>
-    );
+      );
+    }
   }
 }
 
@@ -133,10 +171,10 @@ const styles = StyleSheet.create({
   },
 
   contentContainer: {
-    paddingTop: 30
+    paddingTop: 5
   },
 
-  ClassroomsContainer: {
+  ClassroomContainer: {
     position: "relative",
     top: 10,
     marginBottom: 10,
@@ -151,5 +189,36 @@ const styles = StyleSheet.create({
     shadowRadius: 3,
     alignItems: "center",
     backgroundColor: "#FFF"
+  },
+  StudentContainer: {
+    position: "absolute",
+    top: 10,
+    marginBottom: 10,
+    left: 10,
+    right: 0,
+    height: 70,
+    width: "95%",
+    shadowColor: "black",
+    shadowOffset: { height: -1 },
+    shadowOpacity: 0.05,
+    borderRadius: 8,
+    borderColor: "#F9F9F9",
+    shadowRadius: 3,
+    alignItems: "center",
+    backgroundColor: "#FFF"
   }
 });
+
+const mapStateToProps = state => ({
+  classroomObj: state.classroomsReducer.classroomObj
+});
+
+const mapDispatchToProps = dispatch => ({
+  getClassroomObj: classroomId =>
+    dispatch(actionCreators.getClassroomObj(classroomId))
+});
+
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(ClassroomDetail);

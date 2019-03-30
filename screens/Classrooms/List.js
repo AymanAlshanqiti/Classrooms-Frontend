@@ -1,17 +1,24 @@
-import React from "react";
+import React, { Component } from "react";
 import { ScrollView, StyleSheet, View } from "react-native";
 
-import Classrooms from "../../components/Classrooms/List";
-import { Button, Left, Text, Right, Badge, Icon, Body } from "native-base";
+// Components
 import ClassroomItem from "../../components/Classrooms/Rows";
 
-export default class ClassroomsList extends React.Component {
+// Actions && Connections with Redux
+import { connect } from "react-redux";
+import * as actionCreators from "../../store/actions/classroomsActions";
+
+class ClassroomsList extends Component {
   static navigationOptions = {
     title: "Classrooms"
   };
 
+  async componentDidMount() {
+    await this.props.fetchClassrooms();
+  }
+
   render() {
-    const classrooms = Classrooms.map(classroom => {
+    const classrooms = this.props.classrooms.map(classroom => {
       return (
         <ClassroomItem
           classroom={classroom}
@@ -60,3 +67,16 @@ const styles = StyleSheet.create({
     backgroundColor: "#FFF"
   }
 });
+
+const mapStateToProps = state => ({
+  classrooms: state.classroomsReducer.classrooms
+});
+
+const mapDispatchToProps = dispatch => ({
+  fetchClassrooms: () => dispatch(actionCreators.getClassrooms())
+});
+
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(ClassroomsList);

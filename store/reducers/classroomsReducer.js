@@ -2,7 +2,9 @@ import * as actionTypes from "../actions/types";
 
 const initialState = {
   classrooms: [],
-  loading: true
+  loading: true,
+
+  classroomObj: null
 };
 
 const classroomsReducer = (state = initialState, action) => {
@@ -13,11 +15,19 @@ const classroomsReducer = (state = initialState, action) => {
         classrooms: action.payload,
         loading: false
       };
+
     case actionTypes.CLASSROOMS_LOADING:
       return {
         ...state,
         loading: true
       };
+
+    case actionTypes.GET_CLASSROOM_OBJ:
+      return {
+        ...state,
+        classroomObj: action.payload
+      };
+
     default:
       return state;
   }

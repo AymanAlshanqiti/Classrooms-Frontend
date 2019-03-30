@@ -10,7 +10,11 @@ class ClassroomRow extends Component {
       <Button
         bordered
         style={styles.ClassroomsContainer}
-        onPress={() => this.props.navigation.navigate("Detail")}
+        onPress={() =>
+          this.props.navigation.navigate("Detail", {
+            classroomId: classroom.id
+          })
+        }
       >
         <Left style={{ left: 10 }}>
           <Text style={{ color: this.props.color }}>{classroom.subject} </Text>
@@ -72,4 +76,5 @@ const styles = StyleSheet.create({
     backgroundColor: "#FFF"
   }
 });
+
 export default withNavigation(ClassroomRow);
