@@ -28,6 +28,12 @@ const classroomsReducer = (state = initialState, action) => {
         classroomObj: action.payload
       };
 
+    case actionTypes.CREATE_CLASSROOM:
+      return {
+        ...state,
+        classrooms: state.classrooms.concat(action.payload)
+      };
+
     default:
       return state;
   }

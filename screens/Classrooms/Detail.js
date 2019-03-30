@@ -34,7 +34,6 @@ class ClassroomDetail extends Component {
 
   render() {
     const classroomObj = this.props.classroomObj;
-    console.log("TCL: ClassroomDetail -> render -> classroomObj", classroomObj);
     if (!classroomObj) {
       return (
         <View>

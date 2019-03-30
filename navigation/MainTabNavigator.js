@@ -9,22 +9,33 @@ import TabBarIcon from "../components/TabBarIcon";
 import MyClasses from "../screens/MyClassrooms";
 import ClassroomsList from "../screens/Classrooms/List";
 import ClassroomDetail from "../screens/Classrooms/Detail";
+import ClassroomCreate from "../screens/Classrooms/Create";
+
 import Profile from "../screens/Profile";
 
 const HomeStack = createStackNavigator({
   MyClasses: MyClasses,
-  Detail: ClassroomDetail
+  Detail: ClassroomDetail,
+  Create: ClassroomCreate
 });
 
 HomeStack.navigationOptions = {
   tabBarLabel: "My Classes",
-  tabBarIcon: (
-    <Icon
-      name="mortar-board"
-      type="FontAwesome"
-      style={{ fontSize: 25, color: "#F12580" }}
-    />
-  )
+  tabBarIcon: ({ tintColor }) => {
+    let iconName = "class";
+    let iconType = "MaterialIcons";
+    return (
+      <Icon
+        name={iconName}
+        type={iconType}
+        style={{ color: tintColor, fontSize: 25 }}
+      />
+    );
+  },
+  tabBarOptions: {
+    activeTintColor: "#F12580",
+    inactiveTintColor: "#CCC"
+  }
 };
 
 const LinksStack = createStackNavigator({
@@ -34,13 +45,22 @@ const LinksStack = createStackNavigator({
 
 LinksStack.navigationOptions = {
   tabBarLabel: "Classrooms",
-  tabBarIcon: ({ focused }) => (
-    <Icon
-      name="mortar-board"
-      type="FontAwesome"
-      style={{ fontSize: 25, color: "#CCC" }}
-    />
-  )
+  tabBarIcon: ({ tintColor }) => {
+    let iconName = "mortar-board";
+    let iconType = "FontAwesome";
+    return (
+      <Icon
+        name={iconName}
+        type={iconType}
+        style={{ color: tintColor, fontSize: 25 }}
+      />
+    );
+  },
+
+  tabBarOptions: {
+    activeTintColor: "#F12580",
+    inactiveTintColor: "#CCC"
+  }
 };
 
 const SettingsStack = createStackNavigator({
@@ -49,13 +69,22 @@ const SettingsStack = createStackNavigator({
 
 SettingsStack.navigationOptions = {
   tabBarLabel: "Profile",
-  tabBarIcon: ({ focused }) => (
-    <Icon
-      name="mortar-board"
-      type="FontAwesome"
-      style={{ fontSize: 25, color: "#CCC" }}
-    />
-  )
+  tabBarIcon: ({ tintColor }) => {
+    let iconName = "user";
+    let iconType = "FontAwesome";
+    return (
+      <Icon
+        name={iconName}
+        type={iconType}
+        style={{ color: tintColor, fontSize: 25 }}
+      />
+    );
+  },
+
+  tabBarOptions: {
+    activeTintColor: "#F12580",
+    inactiveTintColor: "#CCC"
+  }
 };
 
 export default createBottomTabNavigator({

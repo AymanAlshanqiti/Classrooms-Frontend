@@ -1,6 +1,5 @@
 import React, { Component } from "react";
 import { ScrollView, StyleSheet, View } from "react-native";
-
 import { Button, Text } from "native-base";
 
 // Components
@@ -39,7 +38,10 @@ class HomeScreen extends Component {
           {myClassrooms}
         </ScrollView>
 
-        <Button style={styles.createClassroomContainer}>
+        <Button
+          style={styles.createClassroomContainer}
+          onPress={() => this.props.navigation.navigate("Create")}
+        >
           <Text style={styles.createClassroomText}>New Classroom</Text>
         </Button>
       </View>
@@ -76,7 +78,7 @@ const styles = StyleSheet.create({
     shadowOffset: { height: -3 },
     shadowOpacity: 0.1,
     shadowRadius: 3,
-    borderRadius: 18,
+    borderRadius: 10,
     alignItems: "center",
     backgroundColor: "#00bcd4"
   }

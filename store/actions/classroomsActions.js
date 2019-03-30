@@ -34,9 +34,40 @@ export const getClassroomObj = classroomId => {
       });
     } catch (error) {
       console.error(
-        "Error While Getting Classroom Object ",
+        "Error while getting classroom object ",
         error.response.data
       );
+    }
+  };
+};
+
+export const createClassroom = classroomObj => {
+  return async dispatch => {
+    try {
+      let response = await axios.post(
+        `http://127.0.0.1:8000/api/classrooms/create/`,
+        classroomObj
+      );
+
+      let newClassroomObj = response.data;
+      dispatch({
+        type: actionTypes.CREATE_CLASSROOM,
+        payload: newClassroomObj
+      });
+    } catch (error) {
+      console.error("Error while create a new classroom ");
+    }
+  };
+};
+
+export const removeClassroom = classroomId => {
+  return async dispatch => {
+    try {
+      let response = await axios.post(
+        `http://127.0.0.1:8000/api/classrooms/delete/${classroomId}/`
+      );
+    } catch (error) {
+      console.error("Error while deletting the classroom ");
     }
   };
 };
