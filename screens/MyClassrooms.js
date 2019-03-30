@@ -4,7 +4,7 @@ import { ScrollView, StyleSheet, View } from "react-native";
 import { Button, Text } from "native-base";
 
 // Components
-import ClassroomItem from "../components/Classrooms/Rows";
+import ClassroomItem from "../components/Classrooms/ClassroomsRows";
 
 // Actions && Connections with Redux
 import { connect } from "react-redux";

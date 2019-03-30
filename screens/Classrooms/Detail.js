@@ -12,7 +12,7 @@ import {
 } from "native-base";
 
 // Components
-import Classrooms from "../../components/Classrooms/List";
+import StudentsRows from "../../components/Classrooms/StudentsRows";
 
 // Actions && Connections with Redux
 import { connect } from "react-redux";
@@ -42,6 +42,11 @@ class ClassroomDetail extends Component {
         </View>
       );
     } else {
+      const students = this.props.classroomObj.students.map(student => {
+        return (
+          <StudentsRows student={student} key={student.id} color="#F12580" />
+        );
+      });
       return (
         <View style={styles.container}>
           <View
@@ -126,36 +131,7 @@ class ClassroomDetail extends Component {
               style={styles.container}
               contentContainerStyle={styles.contentContainer}
             >
-              <View bordered style={styles.StudentContainer}>
-                <Left style={{ left: 10, top: 15 }}>
-                  <Text style={{ color: "#F12580" }}>dffddf </Text>
-
-                  <Icon
-                    name="calendar"
-                    type="AntDesign"
-                    style={{
-                      fontSize: 18,
-                      left: 10,
-                      top: 5,
-                      color: "#C1C1C1"
-                    }}
-                  >
-                    <Text note> ddd {"    "}</Text>
-                    <Icon
-                      name="graduation-cap"
-                      type="Entypo"
-                      style={{
-                        fontSize: 20,
-                        left: 10,
-                        top: 5,
-                        color: "#E1E1E1"
-                      }}
-                    >
-                      <Text note> dadd</Text>
-                    </Icon>
-                  </Icon>
-                </Left>
-              </View>
+              {students}
             </ScrollView>
           </View>
         </View>
@@ -181,23 +157,6 @@ const styles = StyleSheet.create({
     marginLeft: 10,
     marginRight: 10,
     height: 180,
-    shadowColor: "black",
-    shadowOffset: { height: -1 },
-    shadowOpacity: 0.05,
-    borderRadius: 8,
-    borderColor: "#F9F9F9",
-    shadowRadius: 3,
-    alignItems: "center",
-    backgroundColor: "#FFF"
-  },
-  StudentContainer: {
-    position: "absolute",
-    top: 10,
-    marginBottom: 10,
-    left: 10,
-    right: 0,
-    height: 70,
-    width: "95%",
     shadowColor: "black",
     shadowOffset: { height: -1 },
     shadowOpacity: 0.05,

@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import { ScrollView, StyleSheet, View } from "react-native";
 
 // Components
-import ClassroomItem from "../../components/Classrooms/Rows";
+import ClassroomItem from "../../components/Classrooms/ClassroomsRows";
 
 // Actions && Connections with Redux
 import { connect } from "react-redux";
