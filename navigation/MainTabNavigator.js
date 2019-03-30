@@ -13,11 +13,25 @@ import ClassroomCreate from "../screens/Classrooms/Create";
 
 import Profile from "../screens/Profile";
 
-const HomeStack = createStackNavigator({
-  MyClasses: MyClasses,
-  Detail: ClassroomDetail,
-  Create: ClassroomCreate
-});
+const HomeStack = createStackNavigator(
+  {
+    MyClasses: MyClasses,
+    Detail: ClassroomDetail,
+    Create: ClassroomCreate
+  },
+  {
+    defaultNavigationOptions: {
+      headerStyle: {
+        backgroundColor: "#FFF"
+      },
+      headerTitleStyle: {
+        fontWeight: "bold",
+        color: "gray"
+      },
+      headerTintColor: "#F12580"
+    }
+  }
+);
 
 HomeStack.navigationOptions = {
   tabBarLabel: "My Classes",
@@ -38,10 +52,24 @@ HomeStack.navigationOptions = {
   }
 };
 
-const LinksStack = createStackNavigator({
-  Classrooms: ClassroomsList,
-  Detail: ClassroomDetail
-});
+const LinksStack = createStackNavigator(
+  {
+    Classrooms: ClassroomsList,
+    Detail: ClassroomDetail
+  },
+  {
+    defaultNavigationOptions: {
+      headerStyle: {
+        backgroundColor: "#FFF"
+      },
+      headerTitleStyle: {
+        fontWeight: "bold",
+        color: "gray"
+      },
+      headerTintColor: "#F12580"
+    }
+  }
+);
 
 LinksStack.navigationOptions = {
   tabBarLabel: "Classrooms",
@@ -63,9 +91,23 @@ LinksStack.navigationOptions = {
   }
 };
 
-const SettingsStack = createStackNavigator({
-  Profile: Profile
-});
+const SettingsStack = createStackNavigator(
+  {
+    Profile: Profile
+  },
+  {
+    defaultNavigationOptions: {
+      headerStyle: {
+        backgroundColor: "#FFF"
+      },
+      headerTitleStyle: {
+        fontWeight: "bold",
+        color: "gray"
+      },
+      headerTintColor: "#F12580"
+    }
+  }
+);
 
 SettingsStack.navigationOptions = {
   tabBarLabel: "Profile",

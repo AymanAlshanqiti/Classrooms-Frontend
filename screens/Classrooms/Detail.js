@@ -53,7 +53,14 @@ class ClassroomDetail extends Component {
             contentContainerStyle={styles.contentContainer}
           >
             <View bordered style={styles.ClassroomContainer}>
-              <Text style={{ color: "#F12580", top: 20, fontSize: 20 }}>
+              <Text
+                style={{
+                  color: "#F12580",
+                  top: 20,
+                  fontSize: 20,
+                  fontWeight: "bold"
+                }}
+              >
                 {classroomObj.subject}{" "}
               </Text>
               <Row style={{ position: "absolute", top: 45 }}>

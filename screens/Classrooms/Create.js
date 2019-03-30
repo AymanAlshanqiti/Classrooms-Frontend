@@ -36,10 +36,11 @@ class CreateClassroom extends Component {
           <Body>
             <Text
               style={{
-                marginTop: 20,
+                marginTop: 100,
                 marginBottom: 20,
                 color: "#F12580",
-                fontSize: 20
+                fontSize: 20,
+                fontWeight: "bold"
               }}
             >
               Create a new classroom
@@ -152,7 +153,7 @@ const styles = StyleSheet.create({
     position: "absolute",
     bottom: 15,
     left: 25,
-    top: 280,
+    top: 360,
     right: 30,
     height: 50,
     borderRadius: 10,
